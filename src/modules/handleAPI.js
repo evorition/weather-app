@@ -41,7 +41,7 @@ function processWeatherData(weatherData) {
 
 async function getLocations(query) {
   const response = await fetch(
-    `${APIURL}/geo/1.0/direct?q=${query},&appid=${APIKey}`
+    `${APIURL}/geo/1.0/direct?q=${query}&limit=5&appid=${APIKey}`
   );
   const locationsData = await response.json();
 
