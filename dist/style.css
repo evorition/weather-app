@@ -23,3 +23,33 @@ li {
 #search-error {
   display: none;
 }
+
+/* Switcher */
+#switch {
+  display: none;
+}
+
+#labels-container {
+  display: flex;
+  gap: 8px;
+  /* background-color: rgb(236, 236, 237); */
+}
+
+#metric {
+  color: rgb(255, 255, 255);
+  background-color: rgb(235, 110, 75);
+}
+
+#imperial {
+  background-color: rgb(236, 236, 237);
+}
+
+#switch:checked + #labels-container #imperial {
+  color: rgb(255, 255, 255);
+  background-color: rgb(235, 110, 75);
+}
+
+#switch:checked + #labels-container #metric {
+  color: rgb(0, 0, 0);
+  background-color: rgb(236, 236, 237);
+}

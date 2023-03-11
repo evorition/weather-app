@@ -15,6 +15,8 @@ const pressureSpan = document.getElementById("pressure");
 const humiditySpan = document.getElementById("humidity");
 const visibilitySpan = document.getElementById("visibility");
 
+const swicher = document.getElementById("switcher");
+
 function formatTemperature(temperature) {
   return `${Math.round(temperature)}${units === "metric" ? "°C" : "°F"}`;
 }
@@ -99,5 +101,17 @@ async function renderWeatherData(coordinates) {
   humiditySpan.textContent = processedWeatherData.weather.humidity;
   visibilitySpan.textContent = processedWeatherData.weather.visibility;
 }
+
+function switchUnits(event) {
+  if (event.target.checked) {
+    units = "imperial";
+  } else {
+    units = "metric";
+  }
+
+  renderWeatherData(lastCoordinates);
+}
+
+swicher.addEventListener("change", switchUnits);
 
 export default renderWeatherData;
