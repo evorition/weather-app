@@ -1,23 +1,59 @@
 import { getLocations } from "./handleAPI";
+import renderWeatherData from "./displayWeather";
 
 let locations = null;
-const searchContainer = document.getElementById("search-container");
+const searchContainer = document.getElementById("search-inner-container");
 const input = document.querySelector("input");
 const submitButton = document.querySelector("button[type='submit']");
+const errorContrainer = document.getElementById("search-error");
 
 function clearSuggestedLocations() {
-  if (searchContainer.lastElementChild.tagName.toLocaleLowerCase() === "ul") {
-    searchContainer.lastElementChild.remove();
+  const lastChild = searchContainer.lastElementChild;
+
+  if (lastChild instanceof HTMLUListElement) {
+    lastChild.remove();
   }
 }
 
+function resetSearchForm() {
+  clearSuggestedLocations();
+  input.value = "";
+  errorContrainer.style.display = "none";
+}
+
 function listenCityElements(citiesList) {
-  citiesList.children.forEach((city, cityIndex) => {
+  const citiesArray = [...citiesList.children];
+
+  citiesArray.forEach((city, cityIndex) => {
     city.addEventListener("click", () => {
-      clearSuggestedLocations();
-      // Call function with coordinates to show weather in the selected city
+      const coordinates = {
+        lat: locations[cityIndex].lat,
+        lon: locations[cityIndex].lon,
+      };
+      resetSearchForm();
+      renderWeatherData(coordinates);
     });
   });
+}
+
+function createLocationElement(location) {
+  const locationElement = document.createElement("li");
+  const countryFlag = document.createElement("img");
+  const locationDescription = document.createElement("span");
+
+  countryFlag.classList.add("country-flag");
+  countryFlag.crossOrigin = "anonymous";
+  countryFlag.src = `https://countryflagsapi.com/svg/${location.country}`;
+  countryFlag.alt = `${location.country} flag`;
+  locationDescription.textContent =
+    location.country === "US"
+      ? `${location.name}, ${location.state}, ${location.country}`
+      : `${location.name}, ${location.country}`;
+
+  locationElement.appendChild(countryFlag);
+  locationElement.appendChild(locationDescription);
+
+  return locationElement;
 }
 
 function suggestLocations() {
@@ -25,45 +61,46 @@ function suggestLocations() {
 
   const citiesList = document.createElement("ul");
 
-  locations.forEach((location) => {
-    const locationElement = document.createElement("li");
-    const countryFlag = document.createElement("img");
-    const locationDescription = document.createElement("span");
+  const locationElements = locations.map((location) =>
+    createLocationElement(location)
+  );
 
-    countryFlag.crossOrigin = "anonymous";
-    countryFlag.src = `https://countryflagsapi.com/svg/${location.country}`;
-    countryFlag.alt = `${location.country} flag`;
-    locationDescription.textContent =
-      location.country === "US"
-        ? `${location.name}, ${location.state}, ${location.country}`
-        : `${location.name}, ${location.country}`;
-
-    locationElement.appendChild(countryFlag);
-    locationElement.appendChild(locationDescription);
-    citiesList.appendChild(locationElement);
-  });
+  citiesList.append(...locationElements);
 
   searchContainer.appendChild(citiesList);
   listenCityElements(citiesList);
 }
 
+function showError() {
+  errorContrainer.style.display = "block";
+}
+
 async function handleSearchForm() {
+  errorContrainer.style.display = "none";
+
   const cityName = input.value.trim();
+
   if (cityName.length === 0) {
-    // Show error and exit
+    showError();
     return;
   }
 
   locations = await getLocations(cityName);
+
   if (locations.length === 0) {
-    // Show error and exit
+    showError();
     return;
   }
 
-  suggestLocations(locations);
+  suggestLocations();
 }
 
 export default function initSearchForm() {
+  document.addEventListener("click", (event) => {
+    if (!searchContainer.contains(event.target)) {
+      clearSuggestedLocations();
+    }
+  });
   input.addEventListener("focus", clearSuggestedLocations);
   input.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
@@ -72,4 +109,5 @@ export default function initSearchForm() {
     }
   });
   submitButton.addEventListener("click", handleSearchForm);
+  // renderWeatherData({ lat: 51.5085, lon: -0.1257 });
 }
