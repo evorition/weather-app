@@ -6,14 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="./main.js" defer></script>
     <link href="./style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0"
+    />
     <title>Weather</title>
   </head>
   <body>
-    <div>
-      <div id="search-container">
-        <input type="text" placeholder="City name" />
+    <header>
+      <div id="search">
+        <div id="search-container">
+          <div id="search-inner-container">
+            <input type="text" placeholder="City name" />
+          </div>
+          <button type="submit">Search</button>
+        </div>
+        <div id="search-error">Not found. Please enter valid city name.</div>
       </div>
-      <button type="submit">Search</button>
-    </div>
+    </header>
+    <main>
+      <div id="weather">
+        <div id="date-time"></div>
+        <h2 id="location-name"></h2>
+        <div>
+          <img id="weather-icon" />
+          <span id="temperature"></span>
+        </div>
+        <div id="weather-description"></div>
+        <ul id="weather-parameters">
+          <li>
+            <span class="material-symbols-outlined">air</span>
+            <span id="wind"></span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">readiness_score</span>
+            <span id="pressure"></span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">humidity_low</span>
+            <span id="humidity"></span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">visibility</span>
+            <span id="visibility"></span>
+          </li>
+        </ul>
+      </div>
+    </main>
   </body>
 </html>
