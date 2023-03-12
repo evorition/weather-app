@@ -1,27 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 * {
   margin: 0;
   padding: 0;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
 }
 
 li {
   list-style: none;
 }
 
-.country-flag {
-  width: 20px;
+header,
+main {
+  padding: 24px;
+  width: 320px;
+}
+
+/* Header (search bar, suggestions, submit button) */
+header {
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 32px;
+  padding-bottom: 8px;
+  background-color: rgb(236, 236, 236);
+  border-top-right-radius: 24px;
+  border-top-left-radius: 24px;
+}
+
+#search-container {
+  display: flex;
+}
+
+#search-inner-container {
+  width: 90%;
+}
+
+input[type="text"] {
+  width: 100%;
+  height: 34px;
+  padding: 4px;
+  font-size: 1.1rem;
+  box-sizing: border-box;
+  border: none;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+input.show-border {
+  border: 1px solid rgb(0, 0, 0);
+  border-bottom: none;
+  border-radius: 8px 0 0 0;
+}
+
+button[type="submit"] {
+  height: 34px;
+  border: none;
+  padding: 8px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(97, 97, 99);
+  border-radius: 0 8px 8px 0;
+}
+
+#search-inner-container ul {
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 2px;
+  z-index: 1;
+}
+
+#search-inner-container ul li {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1.1rem;
+  padding: 4px;
+}
+
+#search-inner-container ul li:hover {
+  background-color: rgb(250, 250, 250);
+  cursor: pointer;
 }
 
 #search-error {
   display: none;
+}
+
+.country-flag {
+  width: 20px;
+}
+
+/* Main */
+main {
+  background-color: rgb(253, 253, 253);
+  border-bottom-right-radius: 24px;
+  border-bottom-left-radius: 24px;
 }
 
 /* Switcher */
@@ -32,7 +122,6 @@ li {
 #labels-container {
   display: flex;
   gap: 8px;
-  /* background-color: rgb(236, 236, 237); */
 }
 
 #metric {
@@ -41,7 +130,7 @@ li {
 }
 
 #imperial {
-  background-color: rgb(236, 236, 237);
+  background-color: rgb(236, 236, 236);
 }
 
 #switch:checked + #labels-container #imperial {
@@ -51,5 +140,5 @@ li {
 
 #switch:checked + #labels-container #metric {
   color: rgb(0, 0, 0);
-  background-color: rgb(236, 236, 237);
+  background-color: rgb(236, 236, 236);
 }
