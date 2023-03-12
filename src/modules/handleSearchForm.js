@@ -3,7 +3,7 @@ import renderWeatherData from "./displayWeather";
 
 let locations = null;
 const searchContainer = document.getElementById("search-inner-container");
-const input = document.querySelector("input");
+const input = document.querySelector("input[type='text']");
 const submitButton = document.querySelector("button[type='submit']");
 const errorContrainer = document.getElementById("search-error");
 
@@ -11,6 +11,7 @@ function clearSuggestedLocations() {
   const lastChild = searchContainer.lastElementChild;
 
   if (lastChild instanceof HTMLUListElement) {
+    input.classList.toggle("show-border");
     lastChild.remove();
   }
 }
@@ -69,6 +70,8 @@ function suggestLocations() {
 
   searchContainer.appendChild(citiesList);
   listenCityElements(citiesList);
+
+  input.classList.toggle("show-border");
 }
 
 function showError() {
