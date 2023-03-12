@@ -14,4 +14,4 @@ This little application can:
 
 - Show suggestions after you enter city name thanks to Geocoding API from openweathermap.
 - Show weather in the selected city.
-- Switch beetween metric and imperial units and show weather in corresponding units.
+- Switch between metric and imperial units and show weather in corresponding units.
