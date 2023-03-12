@@ -112,5 +112,5 @@ export default function initSearchForm() {
     }
   });
   submitButton.addEventListener("click", handleSearchForm);
-  // renderWeatherData({ lat: 51.5085, lon: -0.1257 });
+  renderWeatherData({ lat: 51.5085, lon: -0.1257 });
 }
