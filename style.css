@@ -114,6 +114,27 @@ main {
   border-bottom-left-radius: 24px;
 }
 
+#weather {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#temperature-container {
+  display: flex;
+  align-items: center;
+}
+
+#temperature {
+  font-size: 2rem;
+}
+
+#weather-parameters li {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
 /* Switcher */
 #switch {
   display: none;
@@ -121,6 +142,7 @@ main {
 
 #labels-container {
   display: flex;
+  justify-content: end;
   gap: 8px;
 }
 
@@ -141,4 +163,9 @@ main {
 #switch:checked + #labels-container #metric {
   color: rgb(0, 0, 0);
   background-color: rgb(236, 236, 236);
+}
+
+#labels-container label {
+  padding: 6px;
+  border-radius: 8px;
 }
