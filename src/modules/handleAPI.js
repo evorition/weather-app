@@ -1,5 +1,5 @@
 const APIKey = "996e62559859a07e044f1ccb7d15d914";
-const APIURL = "http://api.openweathermap.org";
+const APIURL = "https://api.openweathermap.org";
 
 async function getLocations(query) {
   const response = await fetch(
