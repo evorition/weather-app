@@ -39,19 +39,13 @@ function listenCityElements(citiesList) {
 
 function createLocationElement(location) {
   const locationElement = document.createElement("li");
-  const countryFlag = document.createElement("img");
   const locationDescription = document.createElement("span");
 
-  countryFlag.classList.add("country-flag");
-  countryFlag.crossOrigin = "anonymous";
-  countryFlag.src = `https://countryflagsapi.com/svg/${location.country}`;
-  countryFlag.alt = `${location.country} flag`;
   locationDescription.textContent =
     location.country === "US"
       ? `${location.name}, ${location.state}, ${location.country}`
       : `${location.name}, ${location.country}`;
 
-  locationElement.appendChild(countryFlag);
   locationElement.appendChild(locationDescription);
 
   return locationElement;
